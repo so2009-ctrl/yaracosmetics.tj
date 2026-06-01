@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yara Cosmetics | Ultra Luxury Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --black: #030303;
+            --gold: #dfba6b;
+            --gold-gradient: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
+            --glass: rgba(255, 255, 255, 0.85);
+            --bg: #fcf9f5;
+            --text: #1a1a1a;
+            --text-muted: #a0a0a0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        h1, h2, .logo {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Шапкаи сайт (Header) */
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(223, 186, 107, 0.2);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-decoration: none;
+            color: var(--black);
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--gold);
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        /* Чорчӯбаи Ҷустуҷӯи Ултра-Боҳашамат */
+        .search-container {
+            position: relative;
+            max-width: 450px;
+            width: 100%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 50px 14px 28px;
+            border: 2px solid rgba(223, 186, 107, 0.4);
+            border-radius: 50px;
+            outline: none;
+            font-size: 15px;
+            letter-spacing: 1px;
+            font-weight: 500;
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02), 
+                        inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-input:focus {
+            border-color: var(--gold);
+            background: #ffffff;
+            transform: scale(1.03);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25), 
+                        0 1px 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            font-size: 18px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--black);
+            transform: translateY(-50%) scale(1.1);
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+        }
+
+        .search-container:hover .search-input {
+            border-color: rgba(212, 175, 55, 0.8);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.12);
+        }
+
+        /* Шабакаҳои иҷтимоӣ ва Забон */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .social-icons a {
+            font-size: 24px;
+            margin-left: 10px;
+            transition: transform 0.3s;
+        }
+
+        .icon-wa { color: #25D366; }
+        .icon-ig { color: #E1306C; }
+        .social-icons a:hover { transform: translateY(-4px) scale(1.1); }
+
+        .lang-select {
+            padding: 8px 15px;
+            border: 1px solid var(--gold);
+            background: #fff;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+        }
+
+        /* Баннер */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1600') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gold-gradient);
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero h1 b {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 20px;
+            letter-spacing: 2px;
+            max-width: 700px;
+            font-weight: 300;
+        }
+
+        /* Категорияҳо */
+        .categories-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 60px auto 20px;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        .category-btn {
+            background: #fff;
+            border: 1px solid rgba(223, 186, 107, 0.3);
+            padding: 12px 30px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.4s ease;
+        }
+
+        .category-btn.active, .category-btn:hover {
+            background: var(--black);
+            color: #fff;
+            border-color: var(--black);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Маҳсулотҳо */
+        .container { max-width: 1200px; margin: 0 auto 100px; padding: 0 20px; }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .product-card {
+            background: var(--glass);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.6);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.25);
+            border-color: var(--gold);
+        }
+
+        .img-wrapper {
+            width: 100%;
+            height: 340px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.12);
+        }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--gold-gradient);
+            color: #fff;
+            padding: 6px 16px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(214, 175, 55, 0.4);
+        }
+
+        .product-info { padding: 30px 20px; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-cat { font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; margin-bottom: 10px; }
+        .product-title { font-size: 19px; font-weight: 600; margin-bottom: 12px; letter-spacing: 0.5px; line-height: 1.4; }
+        .product-price { font-size: 20px; font-weight: 700; color: var(--gold); margin-bottom: 25px; margin-top: auto; }
+
+        .btn-whatsapp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--black);
+            color: white;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--black);
+        }
+
+        .product-card:hover .btn-whatsapp {
+            background: #25D366;
+            border-color: #25D366;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .no-results {
+            text-align: center;
+            font-size: 20px;
+            color: #999;
+            grid-column: 1 / -1;
+            display: none;
+            padding: 60px;
+        }
+
+        /* Футер */
+        footer {
+            background: var(--black);
+            color: white;
+            padding: 80px 20px 40px;
+            text-align: center;
+            border-top: 4px solid var(--gold);
+        }
+
+        footer h2 { font-size: 36px; letter-spacing: 4px; margin-bottom: 10px; }
+        .footer-contacts p { margin: 10px 0; color: #b3b3b3; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">YARA<span>cosmetics</span></a>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Косметикаи орзуҳои худро кобед..." onkeyup="searchProduct()">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        </div>
+
+        <div class="header-right">
+            <div class="social-icons">
+                <a href="https://wa.me/992900627997" target="_blank" class="icon-wa"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://instagram.com/abuvais7" target="_blank" class="icon-ig"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <select class="lang-select" id="langSelect" onchange="changeLanguage()">
+                <option value="tg">TG</option>
+                <option value="ru">RU</option>
+                <option value="en">EN</option>
+            </select>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Олами Зебоии <b>YARA</b></h1>
+        <p>Маҳсулоти брендии аслӣ бо ороиши дизайнерони машҳур</p>
+    </section>
+
+    <div class="categories-nav">
+        <button class="category-btn active" onclick="filterCategory('all')">Ҳамаи Маҳсулот</button>
+        <button class="category-btn" onclick="filterCategory('makeup')">Ороиши Лаб ва Чашм</button>
+        <button class="category-btn" onclick="filterCategory('skincare')">Нигоҳубини Премиум</button>
+        <button class="category-btn" onclick="filterCategory('perfume')">Атрҳои Фаронсавӣ</button>
+    </div>
+
+    <div class="container">
+        <div class="product-grid" id="productContainer">
+            
+            <div class="no-results" id="noResults">Маҳсулоти дилхоҳатон ёфт нашуд...</div>
+
+            <div class="product-card" data-category="makeup">
+                <div class="img-wrapper">
+                    <span class="badge">Хит</span>
+                    <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Помада</span>
+                    <h3 class="product-title">Помадаи Matte Luxury Gold</h3>
+                    <div class="product-price">140 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Помадаи+Matte+Luxury+Gold-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="skincare">
+                <div class="img-wrapper">
+                    <span class="badge">Нав</span>
+                    <img src="https://images.unsplash.com/photo-1608248597481-496100c8c836?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Нигоҳубини Рӯй</span>
+                    <h3 class="product-title">Креми Органинии Yara Organic</h3>
+                    <div class="product-price">195 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Креми+Yara+Organic-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="perfume">
+                <div class="img-wrapper">
+                    <span class="badge">Премиум</span>
+                    <img src="https://images.unsplash.com/photo-1547887537-6158d64c35b3?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Атр</span>
+                    <h3 class="product-title">Атри Боҳашамати Yara Cristal</h3>
+                    <div class="product-price">380 TJS</div>
+                    <a href="https://wa.me/992974339009?text=Салом!+Мехоҳам+Атри+Yara+Cristal-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="makeup">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Сояи Чашм</span>
+                    <h3 class="product-title">Палеткаи Сояҳои Royal Nude</h3>
+                    <div class="product-price">260 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Палеткаи+Royal+Nude-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="makeup">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1631730359575-38e4755d772b?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Тоналӣ</span>
+                    <h3 class="product-title">Креми Тоналии Velvet Finish</h3>
+                    <div class="product-price">185 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Креми+Тоналии+Velvet-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="skincare">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Равғани Рӯй</span>
+                    <h3 class="product-title">Равғани Тиллоӣ барои Дурахши Пӯст</h3>
+                    <div class="product-price">220 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Равғани+Тиллоӣ-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="makeup">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Пудра</span>
+                    <h3 class="product-title">Пудраи Мати Velvet Powder</h3>
+                    <div class="product-price">150 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Пудраи+Velvet-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="skincare">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1556229174-5e42a09e45af?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Тоник</span>
+                    <h3 class="product-title">Тоники Табиии Роза Намноккунанда</h3>
+                    <div class="product-price">135 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Тоники+Роза-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="perfume">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Атри Занона</span>
+                    <h3 class="product-title">Атри Франсавии "Amour Elixir"</h3>
+                    <div class="product-price">420 TJS</div>
+                    <a href="https://wa.me/992974339009?text=Салом!+Мехоҳам+Атри+Amour+Elixir-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="makeup">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1515688594390-b649af70d282?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Румяна</span>
+                    <h3 class="product-title">Румянаи Дурахшони Rose Glow</h3>
+                    <div class="product-price">130 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Румяна+Rose+Glow-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="skincare">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1617897903246-719242758050?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Маска</span>
+                    <h3 class="product-title">Ниқоби Детокс бо Гили Сиёҳ</h3>
+                    <div class="product-price">95 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Ниқоби+Детокс-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="perfume">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Атри Мардона</span>
+                    <h3 class="product-title">Атри Мардонаи "Noir Extreme"</h3>
+                    <div class="product-price">450 TJS</div>
+                    <a href="https://wa.me/992974339009?text=Салом!+Атри+Noir+Extreme-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="skincare">
+                <div class="img-wrapper">
+                    <span class="badge">Нав</span>
+                    <img src="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Нигоҳубини Бадан</span>
+                    <h3 class="product-title">Лосйони Хушбӯи Бадан Luxury Silk</h3>
+                    <div class="product-price">180 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Лосйони+Бадан+Luxury+Silk-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="makeup">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Ороиши Чашм</span>
+                    <h3 class="product-title">Туши Кирпики Ултра-Ҳаҷм Блэк</h3>
+                    <div class="product-price">110 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Туши+Кирпики+Ултра-Ҳаҷм-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="skincare">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Серуми Рӯй</span>
+                    <h3 class="product-title">Серуми Кислотаи Гиалуронӣ 2%</h3>
+                    <div class="product-price">240 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Серуми+Гиалуронӣ-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="perfume">
+                <div class="img-wrapper">
+                    <span class="badge">Премиум</span>
+                    <img src="https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Атр</span>
+                    <h3 class="product-title">Атри Махсуси Yara Royal Oud</h3>
+                    <div class="product-price">490 TJS</div>
+                    <a href="https://wa.me/992974339009?text=Салом!+Мехоҳам+Атри+Yara+Royal+Oud-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="makeup">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1607602132700-068258431c6c?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Ороиши Лаб</span>
+                    <h3 class="product-title">Блеск барои Лаб бо Эффекти Оинавӣ</h3>
+                    <div class="product-price">95 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Блеск+барои+Лаб-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="skincare">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Нигоҳубини Чашм</span>
+                    <h3 class="product-title">Гидрогел Патчи Тиллоӣ барои Чашм</h3>
+                    <div class="product-price">120 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Патчи+Тиллоӣ-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="makeup">
+                <div class="img-wrapper">
+                    <span class="badge">Хит</span>
+                    <img src="https://images.unsplash.com/photo-1526045431048-f857369aba09?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Тоналӣ</span>
+                    <h3 class="product-title">Кушон бо Эффекти Пӯсти Беайб</h3>
+                    <div class="product-price">175 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Кушон-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="skincare">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Тозакунанда</span>
+                    <h3 class="product-title">Пенкаи Мулоим барои Шустани Рӯй</h3>
+                    <div class="product-price">130 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Пенкаи+Шустани+Рӯй-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="makeup">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Хасу Чӯткаҳо</span>
+                    <h3 class="product-title">Набори Нафиси Чӯткаҳои Наборӣ</h3>
+                    <div class="product-price">290 TJS</div>
+                    <a href="https://wa.me/992900627997?text=Салом!+Мехоҳам+Набори+Чӯткаҳо-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="perfume">
+                <div class="img-wrapper">
+                    <span class="badge">Нав</span>
+                    <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=600" class="product-img">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Атр</span>
+                    <h3 class="product-title">Атри Сабуки Тӯҳфавии Yara Bloom</h3>
+                    <div class="product-price">399 TJS</div>
+                    <a href="https://wa.me/992974339009?text=Салом!+Мехоҳам+Атри+Yara+Bloom-ро+фармоиш+диҳам." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Фармоиш кунед</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-contacts">
+            <h2>YARA COSMETICS</h2>
+            <p>Тоҷикистон, шаҳри Душанбе</p>
+            <p>Тел: +992 900 627 997 | +992 974 33 90 09</p>
+            <p>&copy; 2026 yaracosmetics.tj. Ҳамаи ҳуқуқҳо ҳифз шудаанд.</p>
+        </div>
+    </footer>
+
+    <script>
+        function searchProduct() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.product-card');
+            let noResults = document.getElementById('noResults');
+            let found = false;
+
+            cards.forEach(card => {
+                let title = card.querySelector('.product-title').innerText.toLowerCase();
+                if (title.includes(input)) {
+                    card.style.display = "flex";
+                    found = true;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+            noResults.style.display = found ? "none" : "block";
+        }
+
+        function filterCategory(category) {
+            const buttons = document.querySelectorAll('.category-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function changeLanguage() {
+            let lang = document.getElementById('langSelect').value;
+            if(lang === 'tg') alert("Забон: Тоҷикӣ");
+            if(lang === 'ru') alert("Язык: Русский");
+            if(lang === 'en') alert("Language: English");
+        }
+    </script>
+</body>
+</html>
+
+```
+            
+                    
